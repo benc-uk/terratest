@@ -38,22 +38,22 @@ func PipelineExistsE(wsID string, searchString string, st SearchType) (bool, err
 		return false, err
 	}
 
-	var foundPl *datapipeline.DataPipeline
-	for _, pl := range list {
+	var foundItem *datapipeline.DataPipeline
+	for _, item := range list {
 		if st == SearchByID {
-			if *pl.ID == searchString {
-				foundPl = &pl
+			if *item.ID == searchString {
+				foundItem = &item
 				break
 			}
 		} else {
-			if *pl.DisplayName == searchString {
-				foundPl = &pl
+			if *item.DisplayName == searchString {
+				foundItem = &item
 				break
 			}
 		}
 	}
 
-	if foundPl == nil {
+	if foundItem == nil {
 		return false, errors.New("pipeline could not be found with name " + searchString)
 	}
 

@@ -41,22 +41,22 @@ func LakehouseExistsE(wsID string, searchString string, st SearchType) (bool, er
 		return false, err
 	}
 
-	var foundLH *lakehouse.Lakehouse
-	for _, ws := range list {
+	var foundItem *lakehouse.Lakehouse
+	for _, item := range list {
 		if st == SearchByID {
-			if *ws.ID == searchString {
-				foundLH = &ws
+			if *item.ID == searchString {
+				foundItem = &item
 				break
 			}
 		} else {
-			if *ws.DisplayName == searchString {
-				foundLH = &ws
+			if *item.DisplayName == searchString {
+				foundItem = &item
 				break
 			}
 		}
 	}
 
-	if foundLH == nil {
+	if foundItem == nil {
 		return false, errors.New("lakehouse could not be found with name " + searchString)
 	}
 

@@ -38,22 +38,22 @@ func NotebookExistsE(wsID string, searchString string, st SearchType) (bool, err
 		return false, err
 	}
 
-	var foundNb *notebook.Notebook
-	for _, nb := range list {
+	var foundItem *notebook.Notebook
+	for _, item := range list {
 		if st == SearchByID {
-			if *nb.ID == searchString {
-				foundNb = &nb
+			if *item.ID == searchString {
+				foundItem = &item
 				break
 			}
 		} else {
-			if *nb.DisplayName == searchString {
-				foundNb = &nb
+			if *item.DisplayName == searchString {
+				foundItem = &item
 				break
 			}
 		}
 	}
 
-	if foundNb == nil {
+	if foundItem == nil {
 		return false, errors.New("notebook could not be found with name " + searchString)
 	}
 
